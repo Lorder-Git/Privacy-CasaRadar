@@ -28,7 +28,7 @@
 <body>
 <header>
   <h1>Informativa privacy — CasaRadar</h1>
-  <p>Ultimo aggiornamento: 13/10/2026 (versione 1.0.0)</p>
+  <p>Ultimo aggiornamento: 24/10/2026 (versione 2.1, app CasaRadar 2.5.0)</p>
 </header>
 <main>
 
@@ -38,7 +38,8 @@
     <li>Nessun account, nessuna pubblicità, nessuno strumento di analisi o profilazione.</li>
     <li>Le aste che segui, i preferiti, le note, le ricerche salvate e la rubrica clienti restano <strong>solo sul tuo telefono</strong>.</li>
     <li>Per cercare vicino a te l'app invia al server la posizione <strong>arrotondata a circa 100 metri</strong>, senza salvarla.</li>
-    <li>Se usi l'analisi della perizia (piani Investor e Professional), il PDF che scegli viene inviato al nostro server e a un servizio di intelligenza artificiale solo per l'analisi, e poi scartato.</li>
+    <li>L'analisi della perizia con intelligenza artificiale <strong>non è attiva</strong> in questa versione: nessun PDF viene inviato.</li>
+    <li>Per attivare un piano l'app invia al server delle licenze la chiave e un'impronta anonima del telefono, mai i tuoi dati.</li>
     <li>La mappa viene caricata da OpenStreetMap. Il pagamento avviene su PayPal.</li>
   </ul>
 </div>
@@ -57,8 +58,8 @@
 <h3>Ricerche salvate e avvisi</h3>
 <p>Le ricerche salvate restano sul telefono. Quando apri l'app, questa ripete le ricerche con avviso attivo (come una ricerca normale) e ti segnala con una notifica locale i nuovi risultati. Nessuna email, nessun dato salvato sul server.</p>
 
-<h3>Analisi della perizia (Investor, Professional)</h3>
-<p>Se scegli un PDF da analizzare, il file viene inviato al nostro server (marketplace-apps.com) insieme alla tua chiave di licenza, che serve a verificare il piano. Il server estrae il testo e lo invia al servizio di intelligenza artificiale <strong>NVIDIA</strong> (modello DeepSeek) per ottenere il riepilogo. <strong>Né il PDF né il testo vengono salvati</strong>: sul telefono resta solo il risultato.</p>
+<h3>Analisi della perizia</h3>
+<p>La funzione che analizza il PDF della perizia con l'intelligenza artificiale <strong>non è attiva</strong> nella versione 2.4.0: l'app non invia PDF né testo a nessun server o fornitore di AI. Se in futuro la attiveremo, aggiorneremo prima questa informativa.</p>
 <p>Le perizie delle aste possono contenere dati personali di terzi, per esempio gli occupanti dell'immobile. Carica solo documenti che hai ottenuto legittimamente, come la perizia pubblicata con l'avviso di vendita, e usali solo per valutare l'acquisto.</p>
 
 <h3>Rubrica clienti (Professional)</h3>
@@ -71,7 +72,10 @@
 <p>I report vengono creati sul telefono. Se li condividi, lo fai tu con l'app che scegli.</p>
 
 <h3>Licenza e aggiornamenti</h3>
-<p>La chiave di licenza (email, piano, scadenza) si verifica sul telefono e resta lì. Viene inviata al server solo insieme a una richiesta di analisi della perizia. All'avvio l'app chiede a marketplace-apps.com se esiste una nuova versione: la richiesta non contiene dati personali, oltre all'indirizzo IP.</p>
+<p>La chiave vale al massimo su <strong>2 telefoni</strong>. Per far rispettare questo limite, quando la attivi l'app si collega al nostro server delle licenze (<code>licenze.hubertmontero8514.workers.dev</code>, un servizio Cloudflare Workers gestito da noi) e invia: la <strong>chiave</strong>, che al suo interno contiene l'email con cui hai pagato, il piano e la scadenza; un'<strong>impronta del telefono</strong>, cioè un codice ricavato con una funzione di hash (SHA-256) dal nome dell'app e dall'identificativo Android (ANDROID_ID), poi accorciato. <strong>L'identificativo Android non viene mai inviato in chiaro</strong> e l'impronta è diversa per ogni app.</p>
+<p>La richiesta si ripete in automatico quando l'attivazione va rinnovata, al massimo ogni 30 giorni e solo con il telefono connesso; il server risponde con un'attivazione firmata che l'app verifica anche senza connessione. Il server <strong>non conserva la tua email</strong> né la chiave in chiaro: conserva solo l'hash della chiave, l'impronta, il piano, la data di attivazione e dell'ultimo rinnovo, l'eventuale data dell'ultimo cambio di telefono (uno ogni 30 giorni) e l'hash delle chiavi bloccate (per esempio dopo un rimborso). La prova gratuita vale una sola volta per telefono. Il comando <strong>Disattiva su questo telefono</strong> cancella dal server la riga di quel telefono. L'identificativo Android si legge solo per questo, non per pubblicità o statistiche.</p>
+<p>Nella versione web la chiave si verifica sul server del marketplace, che apre una <strong>sessione</strong> legata al browser con un cookie tecnico (<code>httpOnly</code>): il server conserva l'hash del codice di sessione, l'hash della chiave, il piano e la scadenza, non la tua email; massimo <strong>2 sessioni</strong> per chiave, le sessioni scadute si cancellano entro 30 giorni.</p>
+<p>All'avvio l'app chiede a marketplace-apps.com se esiste una nuova versione: la richiesta non contiene dati personali, oltre all'indirizzo IP.</p>
 
 <h3>Mappa e link esterni</h3>
 <p>Le immagini della mappa arrivano da OpenStreetMap (OpenStreetMap Foundation, Regno Unito), che vede il tuo IP e la zona visualizzata. I pulsanti che aprono il Portale delle Vendite Pubbliche, gli avvisi degli enti, Google Maps o Google Search portano su servizi esterni, con le loro informative.</p>
@@ -83,14 +87,15 @@
 <table>
   <tr><th>Finalità</th><th>Dati</th><th>Base giuridica</th></tr>
   <tr><td>Ricerca sulla mappa</td><td>Posizione arrotondata o Comune, filtri</td><td>Esecuzione del servizio richiesto (art. 6.1.b GDPR)</td></tr>
-  <tr><td>Analisi della perizia</td><td>PDF scelto dall'utente, chiave di licenza</td><td>Esecuzione del servizio richiesto (art. 6.1.b)</td></tr>
-  <tr><td>Vendita e attivazione dei piani</td><td>Email, dati della transazione</td><td>Contratto (art. 6.1.b) e obblighi fiscali (art. 6.1.c)</td></tr>
+  <tr><td>Vendita e attivazione dei piani (max 2 telefoni o 2 sessioni web per chiave)</td><td>Email, dati della transazione, hash della chiave, impronta del telefono, date</td><td>Contratto (art. 6.1.b) e obblighi fiscali (art. 6.1.c)</td></tr>
+  <tr><td>Prevenzione abusi delle licenze (una prova per telefono, un cambio di telefono ogni 30 giorni, chiavi bloccate)</td><td>Solo hash e date</td><td>Legittimo interesse (art. 6.1.f); puoi opporti</td></tr>
   <tr><td>Aggiornamenti e sicurezza</td><td>IP, versione dell'app</td><td>Legittimo interesse (art. 6.1.f)</td></tr>
 </table>
 
 <h2>4. Per quanto tempo restano</h2>
 <ul>
-  <li>Posizione, ricerche, PDF e testo della perizia: non conservati da noi. I log tecnici dei fornitori hanno una conservazione breve.</li>
+  <li>Posizione e ricerche: non conservate da noi. I log tecnici dei fornitori hanno una conservazione breve.</li>
+  <li>Attivazioni sul server delle licenze: finché la licenza è in uso; si cancellano subito con «Disattiva su questo telefono», o comunque dopo 90 giorni senza rinnovo. Prove gratuite: 12 mesi. Data dell'ultimo cambio di telefono: 60 giorni. Hash delle chiavi bloccate: finché servono.</li>
   <li>Dati sul telefono: finché non li cancelli o disinstalli l'app.</li>
   <li>Dati di acquisto: 10 anni, per obblighi fiscali.</li>
 </ul>
@@ -98,8 +103,8 @@
 <h2>5. Destinatari e trasferimenti</h2>
 <ul>
   <li><strong>Supabase</strong>: database di immobili e avvisi, server nell'Unione Europea.</li>
-  <li><strong>Vercel</strong> (marketplace-apps.com) e <strong>Cloudflare</strong>: sito, analisi della perizia, file degli aggiornamenti, licenze.</li>
-  <li><strong>NVIDIA</strong>: analisi AI del testo della perizia.</li>
+  <li><strong>Vercel</strong> (marketplace-apps.com) e <strong>Cloudflare</strong>: sito e versione web, file degli aggiornamenti, server delle licenze e database delle attivazioni.</li>
+  <li><strong>Supabase</strong> (database del marketplace, Unione Europea): sessioni della versione web.</li>
   <li><strong>OpenStreetMap Foundation</strong> (Regno Unito, Paese con decisione di adeguatezza): mappa.</li>
   <li><strong>PayPal</strong>: pagamento. <strong>Resend</strong>: invio dell'email con la chiave.</li>
 </ul>
@@ -109,7 +114,7 @@
 <p>L'app è distribuita solo tramite <a href="https://marketplace-apps.com">marketplace-apps.com</a>, non tramite Google Play. Android può mostrare un avviso durante l'installazione: è normale per qualsiasi app installata fuori dal Play Store.</p>
 
 <h2>7. Pagamento dei piani</h2>
-<p>CasaRadar non è gratuita: senza licenza mostra solo un'anteprima. I piani Pro, Investor e Professional si acquistano sul sito tramite PayPal, e l'app non vede mai dati di pagamento. La prova di 30 giorni si richiede sul sito con la tua email. Usiamo l'email solo per inviarti la chiave e per l'assistenza.</p>
+<p>CasaRadar si acquista sul sito (9,99 € una tantum, tramite PayPal): dopo il pagamento ricevi via email il link per scaricarla e una chiave valida 7 giorni con l'anteprima. Senza una chiave valida l'app mostra solo la pagina per acquistarla. Per usarla oltre i 7 giorni si acquista un piano Pro, Investor o Professional, sempre sul sito tramite PayPal. L'app non vede mai dati di pagamento. La prova di 30 giorni si richiede sul sito con la tua email. Usiamo l'email solo per inviarti la chiave e per l'assistenza.</p>
 
 <h2>8. I tuoi diritti</h2>
 <table>
