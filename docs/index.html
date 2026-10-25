@@ -28,7 +28,7 @@
 <body>
 <header>
   <h1>Informativa privacy — CasaRadar</h1>
-  <p>Ultimo aggiornamento: 24/10/2026 (versione 2.1, app CasaRadar 2.5.0)</p>
+  <p>Ultimo aggiornamento: 25/10/2026 (versione 2.2, app CasaRadar 2.6.0)</p>
 </header>
 <main>
 
@@ -38,7 +38,7 @@
     <li>Nessun account, nessuna pubblicità, nessuno strumento di analisi o profilazione.</li>
     <li>Le aste che segui, i preferiti, le note, le ricerche salvate e la rubrica clienti restano <strong>solo sul tuo telefono</strong>.</li>
     <li>Per cercare vicino a te l'app invia al server la posizione <strong>arrotondata a circa 100 metri</strong>, senza salvarla.</li>
-    <li>L'analisi della perizia con intelligenza artificiale <strong>non è attiva</strong> in questa versione: nessun PDF viene inviato.</li>
+    <li>Analisi della perizia con l'intelligenza artificiale (piani Investor e Professional, solo app Android): <strong>il PDF resta sul telefono</strong>; solo il testo letto dal PDF passa dal nostro server all'AI di Cloudflare per l'analisi e non viene conservato né usato per addestrare l'AI.</li>
     <li>Per attivare un piano l'app invia al server delle licenze la chiave e un'impronta anonima del telefono, mai i tuoi dati.</li>
     <li>La mappa viene caricata da OpenStreetMap. Il pagamento avviene su PayPal.</li>
   </ul>
@@ -59,7 +59,13 @@
 <p>Le ricerche salvate restano sul telefono. Quando apri l'app, questa ripete le ricerche con avviso attivo (come una ricerca normale) e ti segnala con una notifica locale i nuovi risultati. Nessuna email, nessun dato salvato sul server.</p>
 
 <h3>Analisi della perizia</h3>
-<p>La funzione che analizza il PDF della perizia con l'intelligenza artificiale <strong>non è attiva</strong> nella versione 2.4.0: l'app non invia PDF né testo a nessun server o fornitore di AI. Se in futuro la attiveremo, aggiorneremo prima questa informativa.</p>
+<p>Dalla versione 2.6.0 (piani Investor e Professional, solo app Android) puoi far analizzare la perizia di stima dall'intelligenza artificiale. Funziona così:</p>
+<ul>
+  <li>scegli il PDF dal telefono: <strong>il file non viene mai inviato</strong>; l'app ne legge il testo sul telefono;</li>
+  <li>solo il <strong>testo</strong> della perizia, con il token di attivazione del tuo piano (che non contiene la tua email), viene inviato a marketplace-apps.com, che lo passa a <strong>Cloudflare Workers AI</strong> per l'analisi;</li>
+  <li>né noi né Cloudflare <strong>conserviamo</strong> il testo dopo la risposta, e Cloudflare <strong>non lo usa per addestrare</strong> i modelli di AI;</li>
+  <li>sul telefono restano solo il nome del file e il risultato dell'analisi, finché non li cancelli.</li>
+</ul>
 <p>Le perizie delle aste possono contenere dati personali di terzi, per esempio gli occupanti dell'immobile. Carica solo documenti che hai ottenuto legittimamente, come la perizia pubblicata con l'avviso di vendita, e usali solo per valutare l'acquisto.</p>
 
 <h3>Rubrica clienti (Professional)</h3>
@@ -90,11 +96,13 @@
   <tr><td>Vendita e attivazione dei piani (max 2 telefoni o 2 sessioni web per chiave)</td><td>Email, dati della transazione, hash della chiave, impronta del telefono, date</td><td>Contratto (art. 6.1.b) e obblighi fiscali (art. 6.1.c)</td></tr>
   <tr><td>Prevenzione abusi delle licenze (una prova per telefono, un cambio di telefono ogni 30 giorni, chiavi bloccate)</td><td>Solo hash e date</td><td>Legittimo interesse (art. 6.1.f); puoi opporti</td></tr>
   <tr><td>Aggiornamenti e sicurezza</td><td>IP, versione dell'app</td><td>Legittimo interesse (art. 6.1.f)</td></tr>
+  <tr><td>Analisi AI della perizia (solo se la usi)</td><td>Testo della perizia, token di attivazione</td><td>Esecuzione del servizio richiesto (art. 6.1.b GDPR)</td></tr>
 </table>
 
 <h2>4. Per quanto tempo restano</h2>
 <ul>
   <li>Posizione e ricerche: non conservate da noi. I log tecnici dei fornitori hanno una conservazione breve.</li>
+  <li>Testo della perizia inviato per l'analisi: non conservato, né da noi né da Cloudflare; serve solo per la risposta.</li>
   <li>Attivazioni sul server delle licenze: finché la licenza è in uso; si cancellano subito con «Disattiva su questo telefono», o comunque dopo 90 giorni senza rinnovo. Prove gratuite: 12 mesi. Data dell'ultimo cambio di telefono: 60 giorni. Hash delle chiavi bloccate: finché servono.</li>
   <li>Dati sul telefono: finché non li cancelli o disinstalli l'app.</li>
   <li>Dati di acquisto: 10 anni, per obblighi fiscali.</li>
@@ -103,7 +111,7 @@
 <h2>5. Destinatari e trasferimenti</h2>
 <ul>
   <li><strong>Supabase</strong>: database di immobili e avvisi, server nell'Unione Europea.</li>
-  <li><strong>Vercel</strong> (marketplace-apps.com) e <strong>Cloudflare</strong>: sito e versione web, file degli aggiornamenti, server delle licenze e database delle attivazioni.</li>
+  <li><strong>Vercel</strong> (marketplace-apps.com) e <strong>Cloudflare</strong>: sito e versione web, file degli aggiornamenti, server delle licenze e database delle attivazioni. <strong>Cloudflare Workers AI</strong>: analisi del testo della perizia, senza conservazione e senza addestramento.</li>
   <li><strong>Supabase</strong> (database del marketplace, Unione Europea): sessioni della versione web.</li>
   <li><strong>OpenStreetMap Foundation</strong> (Regno Unito, Paese con decisione di adeguatezza): mappa.</li>
   <li><strong>PayPal</strong>: pagamento. <strong>Resend</strong>: invio dell'email con la chiave.</li>
