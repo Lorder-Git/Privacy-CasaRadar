@@ -28,7 +28,7 @@
 <body>
 <header>
   <h1>Informativa privacy — CasaRadar</h1>
-  <p>Ultimo aggiornamento: 25/10/2026 (versione 2.2, app CasaRadar 2.6.0)</p>
+  <p>Ultimo aggiornamento: 26/10/2026 (versione 2.3, app CasaRadar 2.6.0)</p>
 </header>
 <main>
 
@@ -39,7 +39,7 @@
     <li>Le aste che segui, i preferiti, le note, le ricerche salvate e la rubrica clienti restano <strong>solo sul tuo telefono</strong>.</li>
     <li>Per cercare vicino a te l'app invia al server la posizione <strong>arrotondata a circa 100 metri</strong>, senza salvarla.</li>
     <li>Analisi della perizia con l'intelligenza artificiale (piani Investor e Professional, solo app Android): <strong>il PDF resta sul telefono</strong>; solo il testo letto dal PDF passa dal nostro server all'AI di Cloudflare per l'analisi e non viene conservato né usato per addestrare l'AI.</li>
-    <li>Per attivare un piano l'app invia al server delle licenze la chiave e un'impronta anonima del telefono, mai i tuoi dati.</li>
+    <li>Per attivare un piano l'app invia al server delle licenze la chiave (che contiene l'email con cui hai pagato) e un'impronta del telefono ricavata con un hash, mai i dati che inserisci nell'app.</li>
     <li>La mappa viene caricata da OpenStreetMap. Il pagamento avviene su PayPal.</li>
   </ul>
 </div>
@@ -62,7 +62,7 @@
 <p>Dalla versione 2.6.0 (piani Investor e Professional, solo app Android) puoi far analizzare la perizia di stima dall'intelligenza artificiale. Funziona così:</p>
 <ul>
   <li>scegli il PDF dal telefono: <strong>il file non viene mai inviato</strong>; l'app ne legge il testo sul telefono;</li>
-  <li>solo il <strong>testo</strong> della perizia, con il token di attivazione del tuo piano (che non contiene la tua email), viene inviato a marketplace-apps.com, che lo passa a <strong>Cloudflare Workers AI</strong> per l'analisi;</li>
+  <li>solo il <strong>testo</strong> della perizia, viene inviato a marketplace-apps.com, che lo passa a <strong>Cloudflare Workers AI</strong> per l'analisi. Insieme al testo l'app invia il token di attivazione del tuo piano: contiene l'indirizzo email dell'acquirente, il piano e le date di scadenza ed è firmato dal nostro server delle licenze. Il sito lo usa solo per verificare il piano e non lo salva;</li>
   <li>né noi né Cloudflare <strong>conserviamo</strong> il testo dopo la risposta, e Cloudflare <strong>non lo usa per addestrare</strong> i modelli di AI;</li>
   <li>sul telefono restano solo il nome del file e il risultato dell'analisi, finché non li cancelli.</li>
 </ul>
@@ -80,7 +80,7 @@
 <h3>Licenza e aggiornamenti</h3>
 <p>La chiave vale al massimo su <strong>2 telefoni</strong>. Per far rispettare questo limite, quando la attivi l'app si collega al nostro server delle licenze (<code>licenze.hubertmontero8514.workers.dev</code>, un servizio Cloudflare Workers gestito da noi) e invia: la <strong>chiave</strong>, che al suo interno contiene l'email con cui hai pagato, il piano e la scadenza; un'<strong>impronta del telefono</strong>, cioè un codice ricavato con una funzione di hash (SHA-256) dal nome dell'app e dall'identificativo Android (ANDROID_ID), poi accorciato. <strong>L'identificativo Android non viene mai inviato in chiaro</strong> e l'impronta è diversa per ogni app.</p>
 <p>La richiesta si ripete in automatico quando l'attivazione va rinnovata, al massimo ogni 30 giorni e solo con il telefono connesso; il server risponde con un'attivazione firmata che l'app verifica anche senza connessione. Il server <strong>non conserva la tua email</strong> né la chiave in chiaro: conserva solo l'hash della chiave, l'impronta, il piano, la data di attivazione e dell'ultimo rinnovo, l'eventuale data dell'ultimo cambio di telefono (uno ogni 30 giorni) e l'hash delle chiavi bloccate (per esempio dopo un rimborso). La prova gratuita vale una sola volta per telefono. Il comando <strong>Disattiva su questo telefono</strong> cancella dal server la riga di quel telefono. L'identificativo Android si legge solo per questo, non per pubblicità o statistiche.</p>
-<p>Nella versione web la chiave si verifica sul server del marketplace, che apre una <strong>sessione</strong> legata al browser con un cookie tecnico (<code>httpOnly</code>): il server conserva l'hash del codice di sessione, l'hash della chiave, il piano e la scadenza, non la tua email; massimo <strong>2 sessioni</strong> per chiave, le sessioni scadute si cancellano entro 30 giorni.</p>
+<p>Nella versione web la chiave si verifica sul server del marketplace, che apre una <strong>sessione</strong> legata al browser con un cookie tecnico (<code>httpOnly</code>): il server conserva l'impronta del codice di sessione, l'impronta della chiave, l'app, il piano, la scadenza e l'email contenuta nella chiave; massimo <strong>2 sessioni</strong> per chiave; le sessioni si cancellano 30 giorni dopo la scadenza della licenza.</p>
 <p>All'avvio l'app chiede a marketplace-apps.com se esiste una nuova versione: la richiesta non contiene dati personali, oltre all'indirizzo IP.</p>
 
 <h3>Mappa e link esterni</h3>
