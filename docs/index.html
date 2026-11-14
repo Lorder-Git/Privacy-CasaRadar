@@ -28,7 +28,7 @@
 <body>
 <header>
   <h1>Informativa privacy — CasaRadar</h1>
-  <p>Ultimo aggiornamento: 26/10/2026 (versione 2.3, app CasaRadar 2.6.0)</p>
+  <p>Ultimo aggiornamento: 14/11/2026 (versione 2.4, app CasaRadar 2.6.0)</p>
 </header>
 <main>
 
@@ -38,7 +38,7 @@
     <li>Nessun account, nessuna pubblicità, nessuno strumento di analisi o profilazione.</li>
     <li>Le aste che segui, i preferiti, le note, le ricerche salvate e la rubrica clienti restano <strong>solo sul tuo telefono</strong>.</li>
     <li>Per cercare vicino a te l'app invia al server la posizione <strong>arrotondata a circa 100 metri</strong>, senza salvarla.</li>
-    <li>Analisi della perizia con l'intelligenza artificiale (piani Investor e Professional, solo app Android): <strong>il PDF resta sul telefono</strong>; solo il testo letto dal PDF passa dal nostro server all'AI di Cloudflare per l'analisi e non viene conservato né usato per addestrare l'AI.</li>
+    <li>Analisi della perizia con l'intelligenza artificiale (piani Investor e Professional, solo app Android): <strong>il PDF resta sul telefono</strong>; solo il testo letto dal PDF passa dal nostro server all'AI di Cloudflare per l'analisi e non viene conservato né usato per addestrare l'AI. Il server tiene solo un contatore delle analisi del mese, senza la tua email in chiaro.</li>
     <li>Per attivare un piano l'app invia al server delle licenze la chiave (che contiene l'email con cui hai pagato) e un'impronta del telefono ricavata con un hash, mai i dati che inserisci nell'app.</li>
     <li>La mappa viene caricata da OpenStreetMap. Il pagamento avviene su PayPal.</li>
   </ul>
@@ -66,6 +66,7 @@
   <li>né noi né Cloudflare <strong>conserviamo</strong> il testo dopo la risposta, e Cloudflare <strong>non lo usa per addestrare</strong> i modelli di AI;</li>
   <li>sul telefono restano solo il nome del file e il risultato dell'analisi, finché non li cancelli.</li>
 </ul>
+<p><strong>Tetto mensile delle analisi (dal 14 novembre 2026).</strong> Il piano Investor comprende fino a <strong>20 analisi della perizia al mese</strong>, il piano Professional fino a <strong>60</strong>. Per farlo rispettare, a ogni analisi il nostro server aggiorna un contatore nel database del marketplace (Supabase, Unione Europea). Il contatore contiene soltanto: un'<strong>impronta della licenza</strong> (un codice ricavato con una funzione di hash (SHA-256) e una chiave segreta che conosciamo solo noi, calcolato dall'email contenuta nella chiave di licenza oppure, se la chiave non contiene l'email, dall'impronta del telefono; <strong>l'email non viene mai salvata in chiaro</strong>); il nome dell'app e il <strong>mese</strong> (per esempio 2026-11); il <strong>numero di analisi</strong> usate nel mese e la data dell'ultimo aggiornamento. Nel contatore <strong>non ci sono il testo della perizia</strong> né il tuo indirizzo IP. Se un'analisi non va a buon fine per un problema nostro (per esempio l'intelligenza artificiale non risponde), l'analisi ti viene restituita. Finite le analisi del mese, ripartono dal 1° del mese successivo. I contatori vengono cancellati automaticamente 30 giorni dopo la fine del mese a cui si riferiscono.</p>
 <p>Le perizie delle aste possono contenere dati personali di terzi, per esempio gli occupanti dell'immobile. Carica solo documenti che hai ottenuto legittimamente, come la perizia pubblicata con l'avviso di vendita, e usali solo per valutare l'acquisto.</p>
 
 <h3>Rubrica clienti (Professional)</h3>
@@ -97,12 +98,14 @@
   <tr><td>Prevenzione abusi delle licenze (una prova per telefono, un cambio di telefono ogni 30 giorni, chiavi bloccate)</td><td>Solo hash e date</td><td>Legittimo interesse (art. 6.1.f); puoi opporti</td></tr>
   <tr><td>Aggiornamenti e sicurezza</td><td>IP, versione dell'app</td><td>Legittimo interesse (art. 6.1.f)</td></tr>
   <tr><td>Analisi AI della perizia (solo se la usi)</td><td>Testo della perizia, token di attivazione</td><td>Esecuzione del servizio richiesto (art. 6.1.b GDPR)</td></tr>
+  <tr><td>Rispetto del limite mensile di analisi del piano (20 Investor, 60 Professional) e restituzione di quelle non riuscite per un problema nostro</td><td>Impronta della licenza, mese, numero di analisi</td><td>Contratto (art. 6.1.b): il numero di analisi incluse è una condizione del piano, e il contatore è il minimo necessario per applicarla</td></tr>
 </table>
 
 <h2>4. Per quanto tempo restano</h2>
 <ul>
   <li>Posizione e ricerche: non conservate da noi. I log tecnici dei fornitori hanno una conservazione breve.</li>
   <li>Testo della perizia inviato per l'analisi: non conservato, né da noi né da Cloudflare; serve solo per la risposta.</li>
+  <li>Contatore mensile delle analisi AI (impronta della licenza, mese, numero di analisi): cancellato automaticamente 30 giorni dopo la fine del mese a cui si riferisce.</li>
   <li>Attivazioni sul server delle licenze: finché la licenza è in uso; si cancellano subito con «Disattiva su questo telefono», o comunque dopo 90 giorni senza rinnovo. Prove gratuite: 12 mesi. Data dell'ultimo cambio di telefono: 60 giorni. Hash delle chiavi bloccate: finché servono.</li>
   <li>Dati sul telefono: finché non li cancelli o disinstalli l'app.</li>
   <li>Dati di acquisto: 10 anni, per obblighi fiscali.</li>
@@ -112,7 +115,7 @@
 <ul>
   <li><strong>Supabase</strong>: database di immobili e avvisi, server nell'Unione Europea.</li>
   <li><strong>Vercel</strong> (marketplace-apps.com) e <strong>Cloudflare</strong>: sito e versione web, file degli aggiornamenti, server delle licenze e database delle attivazioni. <strong>Cloudflare Workers AI</strong>: analisi del testo della perizia, senza conservazione e senza addestramento.</li>
-  <li><strong>Supabase</strong> (database del marketplace, Unione Europea): sessioni della versione web.</li>
+  <li><strong>Supabase</strong> (database del marketplace, Unione Europea): sessioni della versione web e contatori mensili delle analisi AI.</li>
   <li><strong>OpenStreetMap Foundation</strong> (Regno Unito, Paese con decisione di adeguatezza): mappa.</li>
   <li><strong>PayPal</strong>: pagamento. <strong>Resend</strong>: invio dell'email con la chiave.</li>
 </ul>
